@@ -16,9 +16,15 @@ RUN addgroup payara && \
 USER payara
 WORKDIR ${PAYARA_HOME}
 
+RUN echo $'handlers=java.util.logging.ConsoleHandler\n\
+java.util.logging.ConsoleHandler.formatter=fish.payara.enterprise.server.logging.JSONLogFormatter\n\
+java.util.logging.ConsoleHandler.level=FINEST\n '\
+>> ${PAYARA_HOME}/logging.properties
+
+
 # Default command to run
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=90.0", "-jar", "payara-micro.jar"]
-CMD ["--deploymentDir", "/opt/payara/deployments"]
+CMD ["--deploymentDir", "/opt/payara/deployments", "--logProperties", "/opt/payara/logging.properties"]
 
 # Download specific
 ARG PAYARA_VERSION="5.192"
