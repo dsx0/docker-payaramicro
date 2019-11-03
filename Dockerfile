@@ -21,10 +21,13 @@ java.util.logging.ConsoleHandler.formatter=fish.payara.enterprise.server.logging
 java.util.logging.ConsoleHandler.level=FINEST\n '\
 >> ${PAYARA_HOME}/logging.properties
 
+RUN echo $'set configs.config.server-config.network-config.protocols.protocol.http-listener-1.http.allow-payload-for-undefined-http-methods=true\n '\
+>> ${PAYARA_HOME}/postbootcommandfile.txt
+
 
 # Default command to run
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=90.0", "-jar", "payara-micro.jar"]
-CMD ["--deploymentDir", "/opt/payara/deployments", "--logProperties", "/opt/payara/logging.properties"]
+CMD ["--deploymentDir", "/opt/payara/deployments", "--logProperties", "/opt/payara/logging.properties", "--postbootcommandfile", "/opt/payara/postbootcommandfile.txt"]
 
 # Download specific
 ARG PAYARA_VERSION="5.192"
