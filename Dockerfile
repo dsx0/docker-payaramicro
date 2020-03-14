@@ -7,8 +7,7 @@ EXPOSE 6900 8080
 ENV PAYARA_HOME=/opt/payara\
     DEPLOY_DIR=/opt/payara/deployments
 
-RUN apt-get -qq update && \
-    apt-get -qqy install ttf-dejavu
+RUN apk add --update ttf-dejavu
 
 # Create and set the Payara user and working directory owned by the new user
 RUN addgroup payara && \
