@@ -29,7 +29,7 @@ RUN echo $'set configs.config.server-config.network-config.protocols.protocol.ht
 
 # Default command to run
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=90.0", "-jar", "payara-micro.jar"]
-CMD ["--deploymentDir", "/opt/payara/deployments", "--logProperties", "/opt/payara/logging.properties", "--postbootcommandfile", "/opt/payara/postbootcommandfile.txt"]
+CMD ["--deploymentDir", "/opt/payara/deployments", "--logProperties", "/opt/payara/logging.properties", "--postbootcommandfile", "/opt/payara/postbootcommandfile.txt", "--disablephonehome", "--minhttpthreads", "10", "--maxhttpthreads", "200", "--nocluster"]
 
 # Download specific
 ARG PAYARA_VERSION="5.201"
