@@ -26,6 +26,8 @@ java.util.logging.ConsoleHandler.level=FINEST\n '\
 RUN echo $'set configs.config.server-config.network-config.protocols.protocol.http-listener.http.allow-payload-for-undefined-http-methods=true\n '\
 >> ${PAYARA_HOME}/postbootcommandfile.txt
 
+#maybe max postsize in future (-1 is unlimited):
+#... set configs.config.server-config.network-config.protocols.protocol.http-listener-1.http.max-form-post-size-bytes=-1
 
 # Default command to run
 ENTRYPOINT ["java", "-XX:+UseContainerSupport", "-XX:MaxRAMPercentage=90.0", "-jar", "payara-micro.jar"]
