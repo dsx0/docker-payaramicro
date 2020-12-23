@@ -20,13 +20,8 @@ WORKDIR ${PAYARA_HOME}
 
 RUN echo $'handlers=java.util.logging.ConsoleHandler\n\
 java.util.logging.ConsoleHandler.formatter=fish.payara.enterprise.server.logging.JSONLogFormatter\n\
-java.util.logging.ConsoleHandler.level=FINEST\n '\
+java.util.logging.ConsoleHandler.level=FINEST\n\n '\
 >> ${PAYARA_HOME}/logging.properties
-
-if test -e additional-logging.properties; then
-    RUN echo '\n' >> ${PAYARA_HOME}/logging.properties;
-    RUN cat additional-logging.properties >> ${PAYARA_HOME}/logging.properties;
-fi
 
 RUN echo $'set configs.config.server-config.network-config.protocols.protocol.http-listener.http.allow-payload-for-undefined-http-methods=true\n '\
 >> ${PAYARA_HOME}/postbootcommandfile.txt
